@@ -1,5 +1,44 @@
         const app = document.getElementById('app');
         const floatingTimerEl = document.getElementById('floatingTimer');
+
+        // --- PWA install button logic ---
+        (function setupInstallPrompt() {
+            const installBtn = document.getElementById('installBtn');
+            if (!installBtn) return;
+            let deferredPrompt = null;
+
+            function isStandalone() {
+                return window.matchMedia('(display-mode: standalone)').matches ||
+                    window.navigator.standalone === true;
+            }
+
+            if (isStandalone()) {
+                installBtn.style.display = 'none';
+            }
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                if (!isStandalone()) installBtn.classList.add('show');
+            });
+
+            installBtn.addEventListener('click', async () => {
+                if (!deferredPrompt) return;
+                installBtn.classList.remove('show');
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome !== 'accepted') {
+                    installBtn.classList.add('show');
+                }
+                deferredPrompt = null;
+            });
+
+            window.addEventListener('appinstalled', () => {
+                installBtn.classList.remove('show');
+                deferredPrompt = null;
+            });
+        })();
+
         let audioCtx = null;
 
         function getAudioContext() {
