@@ -2014,12 +2014,12 @@
                 ['&quot;', '"', 'quotation mark'],
                 ['&apos;', "'", 'apostrophe'],
                 ['&nbsp;', ' ', 'non-breaking space'],
-                ['&copy;', '©', 'copyright'],
-                ['&reg;', '®', 'registered'],
-                ['&trade;', '™', 'trademark'],
-                ['&euro;', '€', 'euro'],
-                ['&pound;', '£', 'pound'],
-                ['&yen;', '¥', 'yen'],
+                ['&copy;', 'Â©', 'copyright'],
+                ['&reg;', 'Â®', 'registered'],
+                ['&trade;', 'â„¢', 'trademark'],
+                ['&euro;', 'â‚¬', 'euro'],
+                ['&pound;', 'Â£', 'pound'],
+                ['&yen;', 'Â¥', 'yen'],
             ];
             c.innerHTML =
                 `<div class="output-box" id="herOutput" style="max-height:400px;overflow-y:auto;">${ents.map(e=>`${e[0]} ? ${e[1]} (${e[2]})`).join('\n')}</div>
