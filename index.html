@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevToolKit Pro · 100 Neon Developer Tools</title>
-    
+    <title>DevToolKit Pro - 100 Neon Developer Tools</title>
+
+    <!-- PWA: installable app support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a2e">
+    <link rel="icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="DevToolKit Pro">
+
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
@@ -20,5 +29,14 @@
     
     <!-- Your JavaScript File -->
     <script src="script.js"></script>
+
+    <!-- PWA: register service worker for offline + auto-update -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js').catch(console.error);
+        });
+      }
+    </script>
 </body>
 </html>
